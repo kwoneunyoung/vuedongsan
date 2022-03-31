@@ -1,9 +1,9 @@
 <template>
-  
   <div class="black-bg" v-if="모달창열렸니 == true">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
+      <h4>{{ 원룸들[누른거].title }}</h4>
+      <img :src="원룸들[누른거].image" style="width:100%;">
+      <p>{{ 원룸들[누른거].content }}</p>
       <button @click="close">닫기</button>
     </div>
   </div>
@@ -13,32 +13,27 @@
     <a v-for="item in menus" :key="item">{{ item }}</a>
   </div>
 
-  <div>
-    <img src="./assets/room0.jpg" class="room-image">
-    <h4 style="cursor:pointer;" @click="모달창열렸니 = true">{{ products[0] }}</h4>
-    <p>50 만원</p>
-    <button @click="신고수[0] += 1">허위매물신고</button> <span>신고수 : {{ 신고수[0] }}</span>
+  <Discount></Discount>
+  
+  <div v-for="(item, index) in 원룸들" :key="index">
+    <img :src="item.image" class="room-image">
+    <h4 @click="모달창열렸니 = true; 누른거 = index ">{{ item.title }}</h4>
+    <p>{{ item.price }}원</p>
   </div>
-  <div>
-    <img src="./assets/room1.jpg" class="room-image">
-    <h4>{{ products[1] }}</h4>
-    <p>60 만원</p>
-    <button @click="신고수[1] += 1">허위매물신고</button> <span>신고수 : {{ 신고수[1] }}</span>
-  </div>
-  <div>
-    <img src="./assets/room2.jpg" class="room-image">
-    <h4>{{ products[2] }}</h4>
-    <p>70 만원</p>
-    <button @click="신고수[2] += 1">허위매물신고</button> <span>신고수 : {{ 신고수[2] }}</span>
-  </div>
+
+
 </template>
 
 <script>  
+import data from './assets/oneroom.js';
+import Discount from './components/Discount.vue';
 
 export default { 
   name: 'App',
   data() {
     return {
+      누른거 : 0,
+      원룸들 : data,
       모달창열렸니 : false,
       신고수 : [0,0,0],
       menus : ['Home', 'Shop', 'About'],
@@ -57,6 +52,7 @@ export default {
   },
 
   components: {
+    Discount
   }
 }
 </script>
@@ -105,4 +101,6 @@ div {
   border-radius: 8px;
   padding: 20px;
 }
+
+
 </style>
