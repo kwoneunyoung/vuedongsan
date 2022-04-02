@@ -4,27 +4,30 @@
   <div class="menu">
     <a v-for="item in menus" :key="item">{{ item }}</a>
   </div>
+  <Discount :이름="오브젝트.name" :나이="오브젝트.나이" />
 
-  <Discount></Discount>
+  <card @openModal="모달창열렸니 = true; 누른거 = $event" :원룸="원룸들[index]" v-for=" (원룸, index) in 원룸들" :key="index" />
+
   
-  <div v-for="(item, index) in 원룸들" :key="index">
-    <img :src="item.image" class="room-image">
-    <h4 @click="모달창열렸니 = true; 누른거 = index ">{{ item.title }}</h4>
-    <p>{{ item.price }}원</p>
-  </div>
-
-
+  
+    <!-- <div v-for="(item, index) in 원룸들" :key="index">
+      <img :src="item.image" class="room-image">
+      <h4 @click="close; 누른거 = index ">{{ item.title }}</h4>
+      <p>{{ item.price }}원</p>
+  </div> -->
 </template>
 
 <script>  
 import data from './assets/oneroom.js';
 import Discount from './components/Discount.vue';
 import Modal from './components/Modal.vue';
+import Card from './components/card.vue';
 
 export default { 
   name: 'App',
   data() {
     return {
+      오브젝트 : { name : 'kim', age : 20},
       누른거 : 0,
       원룸들 : data,
       모달창열렸니 : false,
@@ -45,7 +48,7 @@ export default {
   },
 
   components: {
-    Discount, Modal
+    Discount, Modal, Card
   }
 }
 </script>

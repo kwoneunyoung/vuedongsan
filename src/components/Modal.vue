@@ -4,6 +4,7 @@
       <h4>{{ 원룸들[누른거].title }}</h4>
       <img :src="원룸들[누른거].image" style="width:100%;">
       <p>{{ 원룸들[누른거].content }}</p>
+      <p>{{ 원룸들[누른거].price }}</p>
       <!-- <button @click="close">닫기</button> -->
     </div>
   </div>
