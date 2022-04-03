@@ -1,6 +1,6 @@
 <template>
 
-  <Modal :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니" />
+  <Modal :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니 = false; 누른거 = $event" />
   <div class="menu">
     <a v-for="item in menus" :key="item">{{ item }}</a>
   </div>
