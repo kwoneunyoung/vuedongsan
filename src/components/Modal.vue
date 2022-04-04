@@ -4,7 +4,7 @@
       <h4>{{ 원룸들[누른거].title }}</h4>
       <img :src="원룸들[누른거].image" style="width:100%;">
       <p>{{ 원룸들[누른거].content }}</p>
-      <input v-model.number="month">
+      <input v-model="month">
       <p>{{ month }}개월 선택함 : {{ 원룸들[누른거].price * month }} 원</p>
       <button @click="$emit('closeModal', 원룸들[누른거])">닫기</button>
     </div>
@@ -14,25 +14,30 @@
 
 <script>
 export default {
-    name : 'Modal',
-    data() {
-      return {
-        month : 1
-      }
-    },
-    watch : {
-      month(a) {
-        if(isNaN(a) == true) {
-          alert('문자열 입력 ㄴㄴ')
-          this.month = 1
-        }
-      }
-    },
-    props : {
-        "원룸들" : Array,
-        "누른거" : Number,
-        "모달창열렸니" : Boolean
+  name : 'Modal',
+  data() {
+    return {
+      month : 1
     }
+  },
+  watch : {
+    month(a) {
+      if(isNaN(a) == true) {
+        alert('문자열 입력 ㄴㄴ')
+        this.month = 1
+      }
+    }
+  },
+  props : {
+    "원룸들" : Array,
+    "누른거" : Number,
+    "모달창열렸니" : Boolean
+  },
+  updated() {
+    if(isNaN(this.month) == true) {
+      alert('문자열을 입력하지마쇼 ㅇㅅㅇ')
+    }
+  },
 }
 </script>
 

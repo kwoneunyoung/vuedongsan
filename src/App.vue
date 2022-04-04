@@ -7,7 +7,11 @@
   <div class="menu">
     <a v-for="item in menus" :key="item">{{ item }}</a>
   </div>
-  <Discount :이름="오브젝트.name" :나이="오브젝트.나이" />
+  <Discount v-if="showDiscount == true" />
+  <button @click="priceSort">가격낮은순정렬</button>
+  <button @click="sortBack">되돌리기</button>
+  <button>가격높은순정렬</button>
+  <button>가나다순정렬</button>
 
   <card @openModal="모달창열렸니 = true; 누른거 = $event" :원룸="원룸들[index]" v-for=" (원룸, index) in 원룸들" :key="index" />
 
@@ -26,10 +30,13 @@ import Discount from './components/Discount.vue';
 import Modal from './components/Modal.vue';
 import Card from './components/card.vue';
 
+
 export default { 
   name: 'App',
   data() {
     return {
+      showDiscount : true,
+      원룸들오리지널 : [...data],
       오브젝트 : { name : 'kim', age : 20},
       누른거 : 0,
       원룸들 : data,
@@ -47,9 +54,18 @@ export default {
     },
     close() {
       this.모달창열렸니 = false;
-    }
+    },
+    priceSort() {
+      this.원룸들.sort(function(a,b) {
+        return a.price - b.price
+      })
+    },
+    sortBack() {
+      this.원룸들 = [...this.원룸들오리지널]
+    },
   },
-
+  mounted() {
+  },
   components: {
     Discount, Modal, Card
   }
