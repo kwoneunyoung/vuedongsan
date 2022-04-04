@@ -1,6 +1,9 @@
 <template>
 
-  <Modal :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니 = false; 누른거 = $event" />
+  <transition name="fade">
+    <Modal :원룸들="원룸들" :누른거="누른거" :모달창열렸니="모달창열렸니" @closeModal="모달창열렸니 = false; 누른거 = $event" />
+  </transition>
+
   <div class="menu">
     <a v-for="item in menus" :key="item">{{ item }}</a>
   </div>
@@ -96,6 +99,30 @@ div {
   width: 100%; background: white;
   border-radius: 8px;
   padding: 20px;
+}
+
+
+
+.fade-enter-from {
+  transform: translateY(-1000px);
+  /* opacity: 0; */
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  /* opacity: 1; */
+  transform: translateY(0px);
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 
 
